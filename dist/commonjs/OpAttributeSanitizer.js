@@ -52,7 +52,7 @@ var OpAttributeSanitizer = (function () {
             cleanAttrs.indent = Math.min(Number(indent), 30);
         }
         if (tooltip) {
-            cleanAttrs.link = tooltip;
+            cleanAttrs.tooltip = tooltip;
         }
         return cleanAttrs;
     };

@@ -69,7 +69,7 @@ class OpAttributeSanitizer {
         }
 
         if (tooltip) {
-          cleanAttrs.link = tooltip;
+            cleanAttrs.tooltip = tooltip;
         }
 
         return cleanAttrs;
