@@ -10,7 +10,7 @@ var OpAttributeSanitizer = (function () {
         if (!dirtyAttrs || typeof dirtyAttrs !== 'object') {
             return cleanAttrs;
         }
-        var font = dirtyAttrs.font, size = dirtyAttrs.size, link = dirtyAttrs.link, script = dirtyAttrs.script, list = dirtyAttrs.list, header = dirtyAttrs.header, align = dirtyAttrs.align, direction = dirtyAttrs.direction, indent = dirtyAttrs.indent;
+        var font = dirtyAttrs.font, size = dirtyAttrs.size, link = dirtyAttrs.link, script = dirtyAttrs.script, list = dirtyAttrs.list, header = dirtyAttrs.header, align = dirtyAttrs.align, direction = dirtyAttrs.direction, indent = dirtyAttrs.indent, tooltip = dirtyAttrs.tooltip;
         ['bold', 'italic', 'underline', 'strike', 'code', 'blockquote', 'code-block']
             .forEach(function (prop) {
             var v = dirtyAttrs[prop];
@@ -50,6 +50,9 @@ var OpAttributeSanitizer = (function () {
         }
         if (indent && Number(indent)) {
             cleanAttrs.indent = Math.min(Number(indent), 30);
+        }
+        if (tooltip) {
+            cleanAttrs.link = tooltip;
         }
         return cleanAttrs;
     };

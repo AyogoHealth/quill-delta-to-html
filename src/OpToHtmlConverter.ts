@@ -27,7 +27,7 @@ class OpToHtmlConverter {
     private op: DeltaInsertOp;
     constructor(op: DeltaInsertOp, options?: IOpToHtmlConverterOptions) {
         this.op = op;
-        this.options = Object._assign({}, { 
+        this.options = Object._assign({}, {
             classPrefix: 'ql',
             encodeHtml: true,
             listItemTag: 'li',
@@ -48,17 +48,17 @@ class OpToHtmlConverter {
     }
 
     getHtmlParts(): IHtmlParts {
-        
+
         if (this.op.isJustNewline() && !this.op.isContainerBlock()) {
             return {openingTag: '', closingTag: '', content: NewLine};
         }
 
         let tags = this.getTags(), attrs = this.getTagAttributes();
-        
+
         if (!tags.length && attrs.length) {
             tags.push('span');
         }
-        
+
         let beginTags = [], endTags = [];
 
         for (var tag of tags) {
@@ -71,7 +71,7 @@ class OpToHtmlConverter {
 
         return {
             openingTag: beginTags.join(''),
-            content: this.getContent(), 
+            content: this.getContent(),
             closingTag: endTags.join('')
         };
     }
@@ -80,13 +80,16 @@ class OpToHtmlConverter {
         if (this.op.isContainerBlock()) {
             return '';
         }
+        if (this.op.isTooltip()) {
+            return this.op.insert.value;
+        }
         var content = this.op.isFormula() || this.op.isText() ? this.op.insert.value : '';
-        
+
         return this.options.encodeHtml && encodeHtml(content) || content;
     }
 
     getCssClasses(): string[] {
-        
+
         var attrs: any = this.op.attributes;
 
         type Str2StrType = { (x: string): string };
@@ -102,7 +105,7 @@ class OpToHtmlConverter {
 
 
     getCssStyles(): string[] {
-        
+
         var attrs: any = this.op.attributes;
 
         return [['background', 'background-color'], ['color']]
@@ -136,6 +139,10 @@ class OpToHtmlConverter {
             );
         }
 
+        if (this.op.isTooltip()) {
+            return tagAttrs.concat(makeAttr('data-tooltip', this.op.attributes.tooltip), makeAttr("tabindex", "0"));
+        }
+
         var styles = this.getCssStyles();
         var styleAttr = styles.length ? [makeAttr('style', styles.join(';'))] : [];
 
@@ -147,7 +154,7 @@ class OpToHtmlConverter {
     getTags(): string[] {
         var attrs: any = this.op.attributes;
 
-        // code 
+        // code
         if (attrs.code) {
             return ['code'];
         }
@@ -156,16 +163,16 @@ class OpToHtmlConverter {
         if (!this.op.isText()) {
             return [this.op.isVideo() ? 'iframe'
                 : this.op.isImage() ? 'img'
-                    :  'span' // formula 
+                    :  'span' // formula
             ]
         }
 
-        // blocks 
+        // blocks
         var positionTag = this.options.paragraphTag || 'p';
 
-        var blocks = [['blockquote'], ['code-block', 'pre'], 
+        var blocks = [['blockquote'], ['code-block', 'pre'],
                     ['list', this.options.listItemTag ], ['header'],
-                        ['align', positionTag], ['direction', positionTag], 
+                        ['align', positionTag], ['direction', positionTag],
                             ['indent', positionTag]];
         for (var item of blocks) {
             if (attrs[item[0]]) {
@@ -173,7 +180,7 @@ class OpToHtmlConverter {
             }
         }
 
-        // inlines  
+        // inlines
         return [['link', 'a'], ['script'],
         ['bold', 'strong'], ['italic', 'em'], ['strike', 's'], ['underline', 'u']
         ]

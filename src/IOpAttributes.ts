@@ -13,6 +13,7 @@ interface IOpAttributes {
     underline?: boolean,
     strike?: boolean,
     script?: ScriptType,
+    tooltip?: string,
 
     code?: boolean,
 

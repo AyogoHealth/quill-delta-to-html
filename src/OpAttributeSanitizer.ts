@@ -14,7 +14,7 @@ class OpAttributeSanitizer {
         }
 
         let {
-            font, size, link, script, list, header, align, direction, indent
+            font, size, link, script, list, header, align, direction, indent, tooltip
         } = dirtyAttrs;
 
         ['bold', 'italic', 'underline', 'strike', 'code', 'blockquote', 'code-block']
@@ -51,7 +51,7 @@ class OpAttributeSanitizer {
         if (list === ListType.Bullet || list === ListType.Ordered) {
             cleanAttrs.list = list;
         }
-        
+
         if (Number(header)) {
             cleanAttrs.header = Math.min(Number(header), 6);
         }
@@ -66,6 +66,10 @@ class OpAttributeSanitizer {
 
         if (indent && Number(indent)) {
             cleanAttrs.indent = Math.min(Number(indent), 30);
+        }
+
+        if (tooltip) {
+          cleanAttrs.link = tooltip;
         }
 
         return cleanAttrs;

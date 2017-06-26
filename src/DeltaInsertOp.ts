@@ -102,6 +102,10 @@ class DeltaInsertOp {
         return this.isText() && !!this.attributes.link;
     }
 
+    isTooltip() {
+        return !!this.attributes.tooltip;
+    }
+
 }
 
-export { DeltaInsertOp }; 
+export { DeltaInsertOp };
