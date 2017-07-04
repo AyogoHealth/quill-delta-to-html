@@ -31,7 +31,7 @@ class DeltaInsertOp {
         return this.attributes.blockquote;
     }
 
-    isHeader():boolean { 
+    isHeader():boolean {
         return !!this.attributes.header;
     }
 
@@ -39,7 +39,7 @@ class DeltaInsertOp {
         return op.attributes.header === this.attributes.header && this.isHeader();
     }
 
-    // adi: alignment direction indentation 
+    // adi: alignment direction indentation
     hasSameAdiAs(op: DeltaInsertOp) {
         return this.attributes.align === op.attributes.align
             && this.attributes.direction === op.attributes.direction
@@ -102,6 +102,13 @@ class DeltaInsertOp {
         return this.isText() && !!this.attributes.link;
     }
 
+    isTooltip() {
+        return this.insert.type === DataType.Tooltip;
+    }
+
+    isEmoji() {
+        return this.insert.type === DataType.Emoji;
+    }
 }
 
-export { DeltaInsertOp }; 
+export { DeltaInsertOp };

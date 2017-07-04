@@ -25,13 +25,17 @@ var DataType = {
     Image: "image",
     Video: "video",
     Formula: "formula",
-    Text: "text"
+    Text: "text",
+    Tooltip: 'emojiDef',
+    Emoji: 'emojiPick'
 };
 exports.DataType = DataType;
 var GroupType = {
     Block: 'block',
     InlineGroup: 'inline-group',
     List: 'list',
-    Video: 'video'
+    Video: 'video',
+    Tooltip: 'emojiDef',
+    Emoji: 'emojiPick'
 };
 exports.GroupType = GroupType;
