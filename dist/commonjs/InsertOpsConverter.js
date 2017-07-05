@@ -24,6 +24,13 @@ var InsertOpsConverter = (function () {
             if (!insertVal) {
                 continue;
             }
+            if (!op.attributes && op.insert.emojiDef) {
+                op.attributes = op.insert.emojiDef;
+            }
+            if (!op.attributes && op.insert.emojiPick) {
+                var emojiAttr = { emojiPick: op.insert.emojiPick };
+                op.attributes = emojiAttr;
+            }
             attributes = OpAttributeSanitizer_1.OpAttributeSanitizer.sanitize(op.attributes);
             results.push(new DeltaInsertOp_1.DeltaInsertOp(insertVal, attributes));
         }
@@ -40,9 +47,13 @@ var InsertOpsConverter = (function () {
             new InsertData_1.InsertData(value_types_1.DataType.Image, insertPropVal[value_types_1.DataType.Image])
             : value_types_1.DataType.Video in insertPropVal ?
                 new InsertData_1.InsertData(value_types_1.DataType.Video, insertPropVal[value_types_1.DataType.Video])
-                : value_types_1.DataType.Formula in insertPropVal ?
-                    new InsertData_1.InsertData(value_types_1.DataType.Formula, insertPropVal[value_types_1.DataType.Formula])
-                    : null;
+                : value_types_1.DataType.Tooltip in insertPropVal ?
+                    new InsertData_1.InsertData(value_types_1.DataType.Tooltip, insertPropVal[value_types_1.DataType.Tooltip])
+                    : value_types_1.DataType.Emoji in insertPropVal ?
+                        new InsertData_1.InsertData(value_types_1.DataType.Emoji, insertPropVal[value_types_1.DataType.Emoji])
+                        : value_types_1.DataType.Formula in insertPropVal ?
+                            new InsertData_1.InsertData(value_types_1.DataType.Formula, insertPropVal[value_types_1.DataType.Formula])
+                            : null;
     };
     return InsertOpsConverter;
 }());

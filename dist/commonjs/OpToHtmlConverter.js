@@ -52,7 +52,10 @@ var OpToHtmlConverter = (function () {
             return '';
         }
         if (this.op.isTooltip()) {
-            return this.op.insert.value;
+            return this.op.attributes.innerElement;
+        }
+        if (this.op.isEmoji()) {
+            return this.op.attributes.emojiPick;
         }
         var content = this.op.isFormula() || this.op.isText() ? this.op.insert.value : '';
         return this.options.encodeHtml && funcs_html_1.encodeHtml(content) || content;
@@ -90,7 +93,7 @@ var OpToHtmlConverter = (function () {
             return tagAttrs.concat(makeAttr('frameborder', '0'), makeAttr('allowfullscreen', 'true'), makeAttr('src', (this.op.insert.value + '')._scrubUrl()));
         }
         if (this.op.isTooltip()) {
-            return tagAttrs.concat(makeAttr('data-tooltip', this.op.attributes.tooltip), makeAttr("tabindex", "0"));
+            return tagAttrs.concat(makeAttr('data-tooltip', (this.op.attributes.tooltip + '')), makeAttr('tabindex', '0'));
         }
         var styles = this.getCssStyles();
         var styleAttr = styles.length ? [makeAttr('style', styles.join(';'))] : [];

@@ -75,7 +75,10 @@ var DeltaInsertOp = (function () {
         return this.isText() && !!this.attributes.link;
     };
     DeltaInsertOp.prototype.isTooltip = function () {
-        return !!this.attributes.tooltip;
+        return this.insert.type === value_types_1.DataType.Tooltip;
+    };
+    DeltaInsertOp.prototype.isEmoji = function () {
+        return this.insert.type === value_types_1.DataType.Emoji;
     };
     return DeltaInsertOp;
 }());

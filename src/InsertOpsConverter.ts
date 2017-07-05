@@ -6,7 +6,7 @@ import { OpAttributeSanitizer } from './OpAttributeSanitizer';
 import { InsertOpDenormalizer } from './InsertOpDenormalizer';
 
 /**
- * Converts raw delta insert ops to array of denormalized DeltaInsertOp objects 
+ * Converts raw delta insert ops to array of denormalized DeltaInsertOp objects
  */
 class InsertOpsConverter {
 
@@ -16,7 +16,7 @@ class InsertOpsConverter {
             return [];
         }
 
-        var denormalizedOps = [].concat.apply([], 
+        var denormalizedOps = [].concat.apply([],
             deltaOps.map(InsertOpDenormalizer.denormalize));
         var results: DeltaInsertOp[] = [];
 
@@ -32,8 +32,17 @@ class InsertOpsConverter {
                 continue;
             }
 
+            if (!op.attributes && op.insert.emojiDef) {
+               op.attributes = op.insert.emojiDef;
+            }
+
+            if (!op.attributes && op.insert.emojiPick) {
+               var emojiAttr = {emojiPick: op.insert.emojiPick};
+               op.attributes = emojiAttr;
+            }
+
             attributes =  OpAttributeSanitizer.sanitize(op.attributes);
-            
+
             results.push(new DeltaInsertOp(insertVal, attributes));
         }
         return results;
@@ -52,9 +61,13 @@ class InsertOpsConverter {
             new InsertData(DataType.Image, insertPropVal[DataType.Image])
             : DataType.Video in insertPropVal ?
                 new InsertData(DataType.Video, insertPropVal[DataType.Video])
-                : DataType.Formula in insertPropVal ?
-                    new InsertData(DataType.Formula, insertPropVal[DataType.Formula])
-                    : null;
+                : DataType.Tooltip in insertPropVal ?
+                  new InsertData(DataType.Tooltip, insertPropVal[DataType.Tooltip])
+                  : DataType.Emoji in insertPropVal ?
+                    new InsertData(DataType.Emoji, insertPropVal[DataType.Emoji])
+                    : DataType.Formula in insertPropVal ?
+                      new InsertData(DataType.Formula, insertPropVal[DataType.Formula])
+                      : null;
     }
 }
 

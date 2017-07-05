@@ -14,6 +14,8 @@ interface IOpAttributes {
     strike?: boolean,
     script?: ScriptType,
     tooltip?: string,
+    innerElement?: string,
+    emojiPick?: string,
 
     code?: boolean,
 
