@@ -14,7 +14,7 @@ class OpAttributeSanitizer {
         }
 
         let {
-            font, size, link, script, list, header, align, direction, indent, tooltip, innerElement, emojiPick
+            font, size, link, script, list, header, align, direction, indent, tooltip, innerElement, emojiPick, taskElement
         } = dirtyAttrs;
 
         ['bold', 'italic', 'underline', 'strike', 'code', 'blockquote', 'code-block']
@@ -78,6 +78,10 @@ class OpAttributeSanitizer {
 
         if (emojiPick) {
             cleanAttrs.emojiPick = emojiPick;
+        }
+
+        if (taskElement) {
+            cleanAttrs.taskElement = taskElement;
         }
 
         return cleanAttrs;

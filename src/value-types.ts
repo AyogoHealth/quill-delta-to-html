@@ -25,24 +25,26 @@ const AlignType = {
     Right: "right" as AlignType
 }
 
-type DataType = "text" | "image" | "video" | "formula" | "emojiDef" | "emojiPick";
+type DataType = "text" | "image" | "video" | "formula" | "emojiDef" | "emojiPick" | "taskCallout";
 const DataType = {
     Image: "image" as DataType,
     Video: "video" as DataType,
     Formula: "formula" as DataType,
     Text: "text" as DataType,
     Tooltip: 'emojiDef' as DataType,
-    Emoji: 'emojiPick' as DataType
+    Emoji: 'emojiPick' as DataType,
+    Task: 'taskCallout' as DataType
 };
 
-type GroupType = "block" | "inline-group" | "list" | "video" | "emojiDef" | "emojiPick";
+type GroupType = "block" | "inline-group" | "list" | "video" | "emojiDef" | "emojiPick" | "taskCallout";
 const GroupType = {
     Block: 'block' as GroupType,
     InlineGroup: 'inline-group' as GroupType,
     List: 'list' as GroupType,
     Video: 'video' as GroupType,
     Tooltip: 'emojiDef' as GroupType,
-    Emoji: 'emojiPick' as GroupType
+    Emoji: 'emojiPick' as GroupType,
+    Task: 'taskCallout' as GroupType
 };
 
 export { NewLine, ListType, ScriptType, DirectionType, AlignType, DataType, GroupType };

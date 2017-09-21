@@ -16,6 +16,7 @@ interface IOpAttributes {
     tooltip?: string,
     innerElement?: string,
     emojiPick?: string,
+    taskElement?: string,
 
     code?: boolean,
 

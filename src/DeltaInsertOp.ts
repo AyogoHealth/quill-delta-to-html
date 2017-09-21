@@ -109,6 +109,10 @@ class DeltaInsertOp {
     isEmoji() {
         return this.insert.type === DataType.Emoji;
     }
+
+    isTaskCallout() {
+        return this.insert.type === DataType.Task;
+    }
 }
 
 export { DeltaInsertOp };

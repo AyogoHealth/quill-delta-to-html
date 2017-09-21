@@ -86,6 +86,10 @@ class OpToHtmlConverter {
         if (this.op.isEmoji()) {
             return this.op.attributes.emojiPick;
         }
+        if (this.op.isTaskCallout()) {
+          return this.op.attributes.taskElement;
+        }
+
         var content = this.op.isFormula() || this.op.isText() ? this.op.insert.value : '';
 
         return this.options.encodeHtml && encodeHtml(content) || content;

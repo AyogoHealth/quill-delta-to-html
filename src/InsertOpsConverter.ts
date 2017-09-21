@@ -36,6 +36,10 @@ class InsertOpsConverter {
                op.attributes = op.insert.emojiDef;
             }
 
+            if (!op.attributes && op.insert.taskCallout) {
+               op.attributes = op.insert.taskCallout;
+            }
+
             if (!op.attributes && op.insert.emojiPick) {
                var emojiAttr = {emojiPick: op.insert.emojiPick};
                op.attributes = emojiAttr;
@@ -65,9 +69,11 @@ class InsertOpsConverter {
                   new InsertData(DataType.Tooltip, insertPropVal[DataType.Tooltip])
                   : DataType.Emoji in insertPropVal ?
                     new InsertData(DataType.Emoji, insertPropVal[DataType.Emoji])
-                    : DataType.Formula in insertPropVal ?
-                      new InsertData(DataType.Formula, insertPropVal[DataType.Formula])
-                      : null;
+                    : DataType.Task in insertPropVal ?
+                      new InsertData(DataType.Task, insertPropVal[DataType.Task])
+                      : DataType.Formula in insertPropVal ?
+                        new InsertData(DataType.Formula, insertPropVal[DataType.Formula])
+                        : null;
     }
 }
 
