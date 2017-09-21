@@ -27,6 +27,9 @@ var InsertOpsConverter = (function () {
             if (!op.attributes && op.insert.emojiDef) {
                 op.attributes = op.insert.emojiDef;
             }
+            if (!op.attributes && op.insert.taskCallout) {
+                op.attributes = op.insert.taskCallout;
+            }
             if (!op.attributes && op.insert.emojiPick) {
                 var emojiAttr = { emojiPick: op.insert.emojiPick };
                 op.attributes = emojiAttr;
@@ -51,9 +54,11 @@ var InsertOpsConverter = (function () {
                     new InsertData_1.InsertData(value_types_1.DataType.Tooltip, insertPropVal[value_types_1.DataType.Tooltip])
                     : value_types_1.DataType.Emoji in insertPropVal ?
                         new InsertData_1.InsertData(value_types_1.DataType.Emoji, insertPropVal[value_types_1.DataType.Emoji])
-                        : value_types_1.DataType.Formula in insertPropVal ?
-                            new InsertData_1.InsertData(value_types_1.DataType.Formula, insertPropVal[value_types_1.DataType.Formula])
-                            : null;
+                        : value_types_1.DataType.Task in insertPropVal ?
+                            new InsertData_1.InsertData(value_types_1.DataType.Task, insertPropVal[value_types_1.DataType.Task])
+                            : value_types_1.DataType.Formula in insertPropVal ?
+                                new InsertData_1.InsertData(value_types_1.DataType.Formula, insertPropVal[value_types_1.DataType.Formula])
+                                : null;
     };
     return InsertOpsConverter;
 }());

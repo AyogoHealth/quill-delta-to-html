@@ -80,6 +80,9 @@ var DeltaInsertOp = (function () {
     DeltaInsertOp.prototype.isEmoji = function () {
         return this.insert.type === value_types_1.DataType.Emoji;
     };
+    DeltaInsertOp.prototype.isTaskCallout = function () {
+        return this.insert.type === value_types_1.DataType.Task;
+    };
     return DeltaInsertOp;
 }());
 exports.DeltaInsertOp = DeltaInsertOp;

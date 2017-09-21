@@ -27,7 +27,8 @@ var DataType = {
     Formula: "formula",
     Text: "text",
     Tooltip: 'emojiDef',
-    Emoji: 'emojiPick'
+    Emoji: 'emojiPick',
+    Task: 'taskCallout'
 };
 exports.DataType = DataType;
 var GroupType = {
@@ -36,6 +37,7 @@ var GroupType = {
     List: 'list',
     Video: 'video',
     Tooltip: 'emojiDef',
-    Emoji: 'emojiPick'
+    Emoji: 'emojiPick',
+    Task: 'taskCallout'
 };
 exports.GroupType = GroupType;
