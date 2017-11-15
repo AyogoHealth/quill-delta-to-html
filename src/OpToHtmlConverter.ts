@@ -84,7 +84,7 @@ class OpToHtmlConverter {
             return this.op.attributes.innerElement;
         }
         if (this.op.isEmoji()) {
-            return this.op.attributes.emojiPick;
+            return this.op.attributes.emojiPickElement;
         }
         if (this.op.isTaskCallout()) {
           return this.op.attributes.taskElement;

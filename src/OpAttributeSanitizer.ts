@@ -6,7 +6,6 @@ import './extensions/String';
 class OpAttributeSanitizer {
 
     static sanitize(dirtyAttrs: IOpAttributes): IOpAttributes {
-
         var cleanAttrs: any = {};
 
         if (!dirtyAttrs || typeof dirtyAttrs !== 'object') {
@@ -14,7 +13,7 @@ class OpAttributeSanitizer {
         }
 
         let {
-            font, size, link, script, list, header, align, direction, indent, tooltip, innerElement, emojiPick, taskElement
+            font, size, link, script, list, header, align, direction, indent, tooltip, innerElement, emojiPickElement, taskElement
         } = dirtyAttrs;
 
         ['bold', 'italic', 'underline', 'strike', 'code', 'blockquote', 'code-block']
@@ -76,8 +75,8 @@ class OpAttributeSanitizer {
             cleanAttrs.innerElement = innerElement;
         }
 
-        if (emojiPick) {
-            cleanAttrs.emojiPick = emojiPick;
+        if (emojiPickElement) {
+            cleanAttrs.emojiPickElement = emojiPickElement;
         }
 
         if (taskElement) {

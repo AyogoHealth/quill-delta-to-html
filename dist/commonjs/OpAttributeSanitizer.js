@@ -10,7 +10,7 @@ var OpAttributeSanitizer = (function () {
         if (!dirtyAttrs || typeof dirtyAttrs !== 'object') {
             return cleanAttrs;
         }
-        var font = dirtyAttrs.font, size = dirtyAttrs.size, link = dirtyAttrs.link, script = dirtyAttrs.script, list = dirtyAttrs.list, header = dirtyAttrs.header, align = dirtyAttrs.align, direction = dirtyAttrs.direction, indent = dirtyAttrs.indent, tooltip = dirtyAttrs.tooltip, innerElement = dirtyAttrs.innerElement, emojiPick = dirtyAttrs.emojiPick, taskElement = dirtyAttrs.taskElement;
+        var font = dirtyAttrs.font, size = dirtyAttrs.size, link = dirtyAttrs.link, script = dirtyAttrs.script, list = dirtyAttrs.list, header = dirtyAttrs.header, align = dirtyAttrs.align, direction = dirtyAttrs.direction, indent = dirtyAttrs.indent, tooltip = dirtyAttrs.tooltip, innerElement = dirtyAttrs.innerElement, emojiPickElement = dirtyAttrs.emojiPickElement, taskElement = dirtyAttrs.taskElement;
         ['bold', 'italic', 'underline', 'strike', 'code', 'blockquote', 'code-block']
             .forEach(function (prop) {
             var v = dirtyAttrs[prop];
@@ -57,8 +57,8 @@ var OpAttributeSanitizer = (function () {
         if (innerElement) {
             cleanAttrs.innerElement = innerElement;
         }
-        if (emojiPick) {
-            cleanAttrs.emojiPick = emojiPick;
+        if (emojiPickElement) {
+            cleanAttrs.emojiPickElement = emojiPickElement;
         }
         if (taskElement) {
             cleanAttrs.taskElement = taskElement;

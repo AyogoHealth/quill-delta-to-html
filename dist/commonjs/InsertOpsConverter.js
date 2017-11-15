@@ -31,8 +31,7 @@ var InsertOpsConverter = (function () {
                 op.attributes = op.insert.taskCallout;
             }
             if (!op.attributes && op.insert.emojiPick) {
-                var emojiAttr = { emojiPick: op.insert.emojiPick };
-                op.attributes = emojiAttr;
+                op.attributes = op.insert.emojiPick;
             }
             attributes = OpAttributeSanitizer_1.OpAttributeSanitizer.sanitize(op.attributes);
             results.push(new DeltaInsertOp_1.DeltaInsertOp(insertVal, attributes));

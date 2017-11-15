@@ -41,8 +41,7 @@ class InsertOpsConverter {
             }
 
             if (!op.attributes && op.insert.emojiPick) {
-               var emojiAttr = {emojiPick: op.insert.emojiPick};
-               op.attributes = emojiAttr;
+               op.attributes = op.insert.emojiPick;
             }
 
             attributes =  OpAttributeSanitizer.sanitize(op.attributes);
