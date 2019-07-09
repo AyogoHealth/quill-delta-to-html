@@ -583,18 +583,20 @@ var QuillDeltaToHtmlConverter = (function () {
 exports.QuillDeltaToHtmlConverter = QuillDeltaToHtmlConverter;
 
 },{"./InsertOpsConverter":4,"./OpToHtmlConverter":6,"./extensions/Object":9,"./funcs-html":11,"./grouper/Grouper":12,"./grouper/ListNester":13,"./grouper/group-types":14,"./value-types":15}],8:[function(require,module,exports){
-Array.prototype._preferSecond = function () {
+function _preferSecond() {
     if (this.length === 0) {
         return null;
     }
     return this.length >= 2 ? this[1] : this[0];
-};
-Array.prototype._flatten = function () {
+}
+;
+function _flatten() {
     return this.reduce(function (pv, v) {
         return pv.concat(Array.isArray(v) ? v._flatten() : v);
     }, []);
-};
-Array.prototype._groupConsecutiveElementsWhile = function (predicate) {
+}
+;
+function _groupConsecutiveElementsWhile(predicate) {
     var groups = [];
     var currElm, currGroup;
     for (var i = 0; i < this.length; i++) {
@@ -608,8 +610,9 @@ Array.prototype._groupConsecutiveElementsWhile = function (predicate) {
         }
     }
     return groups.map(function (g) { return g.length === 1 ? g[0] : g; });
-};
-Array.prototype._sliceFromReverseWhile = function (startIndex, predicate) {
+}
+;
+function _sliceFromReverseWhile(startIndex, predicate) {
     var result = {
         elements: [],
         sliceStartsAt: -1
@@ -622,8 +625,9 @@ Array.prototype._sliceFromReverseWhile = function (startIndex, predicate) {
         result.elements.unshift(this[i]);
     }
     return result;
-};
-Array.prototype._intersperse = function (item) {
+}
+;
+function _intersperse(item) {
     var _this = this;
     return this.reduce(function (pv, v, index) {
         pv.push(v);
@@ -632,7 +636,12 @@ Array.prototype._intersperse = function (item) {
         }
         return pv;
     }, []);
-};
+}
+Object.defineProperty(Array.prototype, '_preferSecond', { value: _preferSecond, enumerable: false, configurable: false });
+Object.defineProperty(Array.prototype, '_flatten', { value: _flatten, enumerable: false, configurable: false });
+Object.defineProperty(Array.prototype, '_groupConsecutiveElementsWhile', { value: _groupConsecutiveElementsWhile, enumerable: false, configurable: false });
+Object.defineProperty(Array.prototype, '_sliceFromReverseWhile', { value: _sliceFromReverseWhile, enumerable: false, configurable: false });
+Object.defineProperty(Array.prototype, '_intersperse', { value: _intersperse, enumerable: false, configurable: false });
 
 },{}],9:[function(require,module,exports){
 Object._assign = function (target, varArg1, varArg2) {
