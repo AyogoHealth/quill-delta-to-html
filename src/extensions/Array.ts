@@ -15,7 +15,7 @@ interface Array<T> {
 }
 
 
-Array.prototype._preferSecond = function () {
+function _preferSecond() {
     if (this.length === 0) {
         return null;
     }
@@ -23,12 +23,11 @@ Array.prototype._preferSecond = function () {
 };
 
 
-Array.prototype._flatten = function () {
+function _flatten() {
     return this.reduce((pv: any[], v: any) => {
         return pv.concat(Array.isArray(v) ? v._flatten() : v);
     }, []);
 };
-
 
 /**
  * Returns a new array by putting consecutive elements satisfying predicate into a new 
@@ -36,7 +35,7 @@ Array.prototype._flatten = function () {
  * Ex: [1, "ha", 3, "ha", "ha"] => [1, "ha", 3, ["ha", "ha"]] 
  *      where predicate: (v, vprev) => typeof v === typeof vPrev
  */
-Array.prototype._groupConsecutiveElementsWhile = function (
+function _groupConsecutiveElementsWhile(
     predicate: (currElm: any, prevElm: any) => boolean): any[] {
     var groups = [];
 
@@ -62,7 +61,7 @@ Array.prototype._groupConsecutiveElementsWhile = function (
  * Returns consecutive list of elements satisfying the predicate starting from startIndex 
  * and traversing the array in reverse order. 
  */
-Array.prototype._sliceFromReverseWhile = function (startIndex: number,
+function _sliceFromReverseWhile(startIndex: number,
     predicate: (currElm: any) => boolean): IArraySlice {
 
     var result = {
@@ -79,7 +78,7 @@ Array.prototype._sliceFromReverseWhile = function (startIndex: number,
     return result;
 };
 
-Array.prototype._intersperse = function (item) {
+function _intersperse(item: any) {
     return this.reduce((pv: any[], v: any, index: number) => {
         pv.push(v);
         if (index < (this.length - 1)) {
@@ -88,3 +87,10 @@ Array.prototype._intersperse = function (item) {
         return pv;
     }, []);
 }
+
+
+Object.defineProperty(Array.prototype, '_preferSecond', { value: _preferSecond, enumerable: false, configurable: false });
+Object.defineProperty(Array.prototype, '_flatten', { value: _flatten, enumerable: false, configurable: false });
+Object.defineProperty(Array.prototype, '_groupConsecutiveElementsWhile', { value: _groupConsecutiveElementsWhile, enumerable: false, configurable: false });
+Object.defineProperty(Array.prototype, '_sliceFromReverseWhile', { value: _sliceFromReverseWhile, enumerable: false, configurable: false });
+Object.defineProperty(Array.prototype, '_intersperse', { value: _intersperse, enumerable: false, configurable: false });
