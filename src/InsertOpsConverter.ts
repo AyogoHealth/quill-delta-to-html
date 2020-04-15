@@ -1,4 +1,5 @@
 
+import './extensions/Object';
 import { DeltaInsertOp } from './DeltaInsertOp';
 import { DataType } from './value-types';
 import { InsertData } from './InsertData';
@@ -32,16 +33,16 @@ class InsertOpsConverter {
                 continue;
             }
 
-            if (!op.attributes && op.insert.emojiDef) {
-               op.attributes = op.insert.emojiDef;
+            if (op.insert.emojiDef) {
+               Object._assign(op.attributes, op.insert.emojiDef);
             }
 
-            if (!op.attributes && op.insert.taskCallout) {
-               op.attributes = op.insert.taskCallout;
+            if (op.insert.taskCallout) {
+               Object._assign(op.attributes, op.insert.taskCallout);
             }
 
-            if (!op.attributes && op.insert.emojiPick) {
-               op.attributes = op.insert.emojiPick;
+            if (op.insert.emojiPick) {
+               Object._assign(op.attributes, op.insert.emojiPick);
             }
 
             attributes =  OpAttributeSanitizer.sanitize(op.attributes);

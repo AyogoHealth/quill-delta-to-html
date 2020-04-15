@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+require("./extensions/Object");
 var DeltaInsertOp_1 = require("./DeltaInsertOp");
 var value_types_1 = require("./value-types");
 var InsertData_1 = require("./InsertData");
@@ -24,14 +25,14 @@ var InsertOpsConverter = (function () {
             if (!insertVal) {
                 continue;
             }
-            if (!op.attributes && op.insert.emojiDef) {
-                op.attributes = op.insert.emojiDef;
+            if (op.insert.emojiDef) {
+                Object._assign(op.attributes, op.insert.emojiDef);
             }
-            if (!op.attributes && op.insert.taskCallout) {
-                op.attributes = op.insert.taskCallout;
+            if (op.insert.taskCallout) {
+                Object._assign(op.attributes, op.insert.taskCallout);
             }
-            if (!op.attributes && op.insert.emojiPick) {
-                op.attributes = op.insert.emojiPick;
+            if (op.insert.emojiPick) {
+                Object._assign(op.attributes, op.insert.emojiPick);
             }
             attributes = OpAttributeSanitizer_1.OpAttributeSanitizer.sanitize(op.attributes);
             results.push(new DeltaInsertOp_1.DeltaInsertOp(insertVal, attributes));

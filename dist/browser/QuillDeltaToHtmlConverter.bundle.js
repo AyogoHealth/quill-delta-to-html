@@ -138,6 +138,7 @@ exports.InsertOpDenormalizer = InsertOpDenormalizer;
 },{"./extensions/Object":9,"./extensions/String":10,"./value-types":15}],4:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+require("./extensions/Object");
 var DeltaInsertOp_1 = require("./DeltaInsertOp");
 var value_types_1 = require("./value-types");
 var InsertData_1 = require("./InsertData");
@@ -162,14 +163,14 @@ var InsertOpsConverter = (function () {
             if (!insertVal) {
                 continue;
             }
-            if (!op.attributes && op.insert.emojiDef) {
-                op.attributes = op.insert.emojiDef;
+            if (op.insert.emojiDef) {
+                Object._assign(op.attributes, op.insert.emojiDef);
             }
-            if (!op.attributes && op.insert.taskCallout) {
-                op.attributes = op.insert.taskCallout;
+            if (op.insert.taskCallout) {
+                Object._assign(op.attributes, op.insert.taskCallout);
             }
-            if (!op.attributes && op.insert.emojiPick) {
-                op.attributes = op.insert.emojiPick;
+            if (op.insert.emojiPick) {
+                Object._assign(op.attributes, op.insert.emojiPick);
             }
             attributes = OpAttributeSanitizer_1.OpAttributeSanitizer.sanitize(op.attributes);
             results.push(new DeltaInsertOp_1.DeltaInsertOp(insertVal, attributes));
@@ -201,7 +202,7 @@ var InsertOpsConverter = (function () {
 }());
 exports.InsertOpsConverter = InsertOpsConverter;
 
-},{"./DeltaInsertOp":1,"./InsertData":2,"./InsertOpDenormalizer":3,"./OpAttributeSanitizer":5,"./value-types":15}],5:[function(require,module,exports){
+},{"./DeltaInsertOp":1,"./InsertData":2,"./InsertOpDenormalizer":3,"./OpAttributeSanitizer":5,"./extensions/Object":9,"./value-types":15}],5:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var value_types_1 = require("./value-types");
