@@ -164,13 +164,13 @@ var InsertOpsConverter = (function () {
                 continue;
             }
             if (op.insert.emojiDef) {
-                Object._assign(op.attributes, op.insert.emojiDef);
+                op.attributes = Object._assign({}, op.attributes, op.insert.emojiDef);
             }
             if (op.insert.taskCallout) {
-                Object._assign(op.attributes, op.insert.taskCallout);
+                op.attributes = Object._assign({}, op.attributes, op.insert.taskCallout);
             }
             if (op.insert.emojiPick) {
-                Object._assign(op.attributes, op.insert.emojiPick);
+                op.attributes = Object._assign({}, op.attributes, op.insert.emojiPick);
             }
             attributes = OpAttributeSanitizer_1.OpAttributeSanitizer.sanitize(op.attributes);
             results.push(new DeltaInsertOp_1.DeltaInsertOp(insertVal, attributes));
